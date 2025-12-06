@@ -3,11 +3,14 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from  'dotenv';
 
+
 import { connectDB } from './db.js';
 
 connectDB();
 dotenv.config();
 const app = express();
+const auth = require('./Routes/auth.js');
+app.use("/auth", auth);
 
 app.use(cors());
 app.use(express.json());
