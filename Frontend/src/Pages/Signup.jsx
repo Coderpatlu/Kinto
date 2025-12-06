@@ -24,7 +24,7 @@ const Signup = () => {
         } 
        if(!values.password){
             errs.password = "Password is required";
-        }else if (values.password.lenght <= 8) {
+        }else if (values.password.length <= 8) {
             errs.email = "Password must be at least 8 Characters.";
         } 
         if(values.confirmPassword !== values.password) {
@@ -41,7 +41,7 @@ const Signup = () => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefult();
+        e.preventDefault();
         const v = validate(form);
         setError(v);
         if(Object.keys(v).length === 0) {
