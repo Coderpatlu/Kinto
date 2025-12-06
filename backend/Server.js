@@ -1,26 +1,19 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import dotenv from  'dotenv';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { connectDB } from "./db.js";
+import auth from "./Routes/auth.js";
 
-
-import { connectDB } from './db.js';
-
-connectDB();
 dotenv.config();
-const app = express();
-const auth = require('./Routes/auth.js');
-app.use("/auth", auth);
+connectDB();
 
+const app = express();
+
+// Middlewares must be first
 app.use(cors());
 app.use(express.json());
 
+// Routes
+app.use("/auth", auth);
 
-app.get("/users", (req, res) => {
-    res.json({
-        message : "Users Api WOrking"
-    });
-
-})
-
-app.listen(5000, () =>console.log("Server Running on Port 5000"));
+app.listen(5000, () => console.log("Server Running on Port 5000"));
